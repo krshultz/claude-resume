@@ -54,6 +54,19 @@ Issues and pull requests are welcome, especially reports of setups where it work
 
 3. Open a new terminal, or run `exec zsh`.
 
+#### Or: clone it somewhere else and symlink it
+
+If you'd rather keep the repo with your other projects, clone it there and put a symlink in
+the plugins folder (step 2 above still applies):
+
+```sh
+git clone https://github.com/krshultz/claude-resume.git ~/Repositories/claude-resume
+ln -s ~/Repositories/claude-resume \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/claude-resume"
+```
+
+This is how I run it myself. See [Development](#development) for why it helps.
+
 ### Plain zsh (untested)
 
 Clone the repo anywhere, then source the plugin in `~/.zshrc`. It must come **after**
@@ -79,9 +92,29 @@ files newest first and reads the `aiTitle` entry from each one to use as the lab
   doesn't ship a zsh completion of its own, so you shouldn't lose anything.
 - **Untitled sessions** show as `(untitled)`.
 
+## Development
+
+If you plan to change the plugin, use the symlink install above. That way there's only one
+copy: the Oh My Zsh plugin folder points at your working repo, so you edit, commit and test in
+the same place. You never find yourself editing one copy while your shell loads another.
+
+- **Reload after editing:** run `exec zsh`. It starts a fresh shell, which is more reliable
+  than `source ~/.zshrc` re-running your config on top of the current one.
+- **Check which file is loaded:** `whence -v _claude_sessions` prints the path the function
+  came from.
+- **If you move or rename the repo,** the symlink breaks and Oh My Zsh warns
+  `[oh-my-zsh] plugin 'claude-resume' not found` at startup. Point it at the new location with:
+
+  ```sh
+  ln -sfn /new/path/to/claude-resume \
+    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/claude-resume"
+  ```
+
 ## Uninstall
 
-Remove `claude-resume` from `plugins=(...)`, or delete the `source` line, then delete the cloned folder.
+Remove `claude-resume` from `plugins=(...)`, or delete the `source` line, then delete the cloned
+folder. If you used a symlink, delete the link too (`rm` on the link removes only the link, not
+the repo).
 
 ## License
 
