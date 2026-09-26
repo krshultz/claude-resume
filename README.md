@@ -10,12 +10,13 @@ claude --resume bdfd6099-6313-4c1f-8699-7ef75d3b15ec
 ```
 
 Rather than copying that ID, type `claude -r` and press Tab. You get a list of the sessions you
-started in the current directory, newest first, each labeled with the title Claude Code gave it:
+started in the current directory, newest first. Each one is labeled with when it was last used
+and the title Claude Code gave it:
 
 ```
 $ claude -r <Tab>
-c314cca8-feab-4327-8dfc-21e387dcfd7c  -- Claude resume command completion
-b3be8c97-a9fa-474f-9c1f-1bdb08eec2c5  -- Search CachedData for targa
+c314cca8-feab-4327-8dfc-21e387dcfd7c  -- 2026-09-26 12:34  Claude resume command completion
+b3be8c97-a9fa-474f-9c1f-1bdb08eec2c5  -- 2026-09-24 09:10  Search CachedData for targa
 ```
 
 ## Please read first: use at your own risk
@@ -81,7 +82,9 @@ source /path/to/claude-resume/claude-resume.plugin.zsh
 
 Claude Code saves each session as a file named after its session ID, in a folder named after
 the directory the session started in (with `/` and `.` replaced by `-`). The plugin lists those
-files newest first and reads the `aiTitle` entry from each one to use as the label.
+files newest first and reads the `aiTitle` entry from each one to use as the label. The date is
+the file's last-modified time. Claude Code adds to the file as the session runs, so that time is
+when the session was last used.
 
 ## Limitations
 
