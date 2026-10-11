@@ -9,8 +9,8 @@ Resume this session with:
 claude --resume bdfd6099-6313-4c1f-8699-7ef75d3b15ec
 ```
 
-Rather than copying that ID, type `claude -r` and press Tab. You get a list of the sessions you
-started in the current directory, newest first. Each one is labeled with when it was last used
+Rather than copying that ID, type `claude -r` and press Tab. You get a list of the most recent
+sessions you started in the current directory (10 by default), newest first. Each one is labeled with when it was last used
 and the title Claude Code gave it:
 
 ```
@@ -77,6 +77,18 @@ Clone the repo anywhere, then source the plugin in `~/.zshrc`. It must come **af
 autoload -Uz compinit && compinit
 source /path/to/claude-resume/claude-resume.plugin.zsh
 ```
+
+## Settings
+
+To change how many sessions are listed, set `CLAUDE_RESUME_MAX` in `~/.zshrc` (it defaults to
+10). Set it to `0` to list every session:
+
+```sh
+export CLAUDE_RESUME_MAX=25
+```
+
+Showing more sessions makes Tab slower in busy directories, because the plugin reads each
+listed session's file to find its title.
 
 ## How it works
 
